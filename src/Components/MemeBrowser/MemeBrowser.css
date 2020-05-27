@@ -1,0 +1,27 @@
+.meme-browser-root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+}
+
+.meme-browser-root input {
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.meme-browser-root .results {
+    width: 90%;
+    padding: 20px 0;
+}
+
+.meme-browser-root .results img {
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+}
+
+@media only screen and (min-width: 768px) {
+
+}
