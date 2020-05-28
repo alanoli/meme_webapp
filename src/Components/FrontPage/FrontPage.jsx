@@ -3,10 +3,10 @@ import { Button } from "antd"
 import "./FrontPage.css"
 
 
-export default React.forwardRef((props, ref) => {
+export default React.forwardRef((props, catalogRef) => {
 
     function navToRef() {
-        ref.current.scrollIntoView({behavior: "smooth", block: "start"})
+        catalogRef.current.scrollIntoView({behavior: "smooth", block: "start"})
     }
 
     return (

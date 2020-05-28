@@ -1,15 +1,18 @@
 import React from "react"
+import { useHistory } from "react-router-dom"
 import { PageHeader } from "antd"
+
 import "./Header.css"
 
-const avatarImg = require("../../Assets/Images/galoCego.jpg")
 
 export default function Header() {
+    const history = useHistory()
     return (
-        <PageHeader
-            className="page-header front-page-background"
-            title="seumeme.com"
-            avatar={{ src: avatarImg }}
-        />
+        <div className="custom-page-header">
+            <PageHeader
+                title="seumeme.com"
+                onBack={() => history.push("/")}
+            />
+        </div>
     )
 }

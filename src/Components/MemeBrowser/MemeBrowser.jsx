@@ -5,10 +5,9 @@ import { SearchOutlined } from "@ant-design/icons"
 import api from "../../Connection/api"
 import "./MemeBrowser.css"
 
-import Loading from "../Loading/Loading"
 import TagSelector from "./TagSelector"
+import Result from "./Result"
 
-const avatarImg = require("../../Assets/Images/galoCego.jpg")
 
 export default React.forwardRef((props, ref) => {
 
@@ -64,6 +63,7 @@ export default React.forwardRef((props, ref) => {
                     tagColor="red"
                     ref={stylesRef}
                     options={[{ value: "feliz-triste" }, { value: "conversa-wpp" }]}
+                    inputProps={{readOnly:true}}
                 />
                 <Button
                     onClick={async () => { navToRef(); setFetchingData(true); await getData(); setFetchingData(false) }}
@@ -72,22 +72,11 @@ export default React.forwardRef((props, ref) => {
                     Pesquisar
                 </Button>
             </div>
-            <div ref={resultRef} className="results">
-                <div className="results-container">
-                    {fetchingData ?
-                        <Loading className="loading" />
-                        :
-                        // <img src={avatarImg} alt="meme-imagem" />
-                        <Carousel
-                            dots={false}
-                        >
-                            {memeArray.map((item) => {
-                                return <img key={item.key} src={item.url} alt="meme-imagem" />
-                            })}
-                        </Carousel>
-                    }
-                </div>
-            </div>
+            <Result
+                ref={resultRef}
+                memeArray={memeArray}
+                fetchingData={fetchingData}
+            />
         </div>
     )
 })

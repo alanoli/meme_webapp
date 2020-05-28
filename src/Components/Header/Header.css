@@ -1,7 +1,4 @@
-.page-header {
-
-}
-
-.ant-page-header-heading-title span {
-    font-size: 1rem;
+.custom-page-header {
+    font-family: 'Roboto Slab', serif;
+    /* background-color: blue; */
 }
