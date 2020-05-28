@@ -1,7 +1,4 @@
 .front-page {
-    /* position: absolute;
-    top: 0; */
-
     height: calc(100vh - 72px);
     width: 100%;
 
@@ -12,10 +9,26 @@
     text-align: center;
 
     padding: 0 1rem;
+    font-family: 'Roboto Slab', serif;
 }
 
 .front-page .btn-go {
     width: 50%;
+    background-color: rgb(38, 98, 167);
+    color: white;
+    border: none;
+}
+
+.front-page .btn-go:hover {
+    background-color: white;
+    color: rgb(38, 98, 167);
+    /* border: 2px solid;
+    border-color: rgb(38, 98, 167);; */
+}
+
+.front-page h1 {
+    color: white;
+    font-size: 2.3rem;
 }
 
 .after-front {

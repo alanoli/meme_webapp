@@ -7,7 +7,7 @@ const avatarImg = require("../../Assets/Images/galoCego.jpg")
 export default function Header() {
     return (
         <PageHeader
-            className="page-header"
+            className="page-header front-page-background"
             title="seumeme.com"
             avatar={{ src: avatarImg }}
         />

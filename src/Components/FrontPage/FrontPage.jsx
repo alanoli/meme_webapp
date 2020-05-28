@@ -1,19 +1,20 @@
-import React, { useRef } from "react"
+import React, { useRef, createRef } from "react"
 import { Button } from "antd"
-import MemeBrowser from "../MemeBrowser/MemeBrowser"
-
 import "./FrontPage.css"
 
 
-export default function FrontPage() {
+export default React.forwardRef((props, ref) => {
 
-    const browseMemeRef = useRef(null)
+    function navToRef() {
+        ref.current.scrollIntoView({behavior: "smooth", block: "start"})
+    }
 
     return (
-        <div className="front-page">
-            <h1 className="title">Seu repositório de memes favorito</h1>
-            {/* <Button onClick={() => window.scrollTo(0, browseMemeRef.current.offsetTop)} className="btn-go">Explorar</Button> */}
-            <Button className="btn-go">Explorar</Button>
-        </div>
+        <>
+            <div className="front-page front-page-background">
+                <h1 className="title">Seu repositório de memes favorito</h1>
+                <Button onClick={navToRef} className="btn-go">Explorar</Button>
+            </div>
+        </>
     )
-}
+})

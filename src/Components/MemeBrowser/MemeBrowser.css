@@ -1,25 +1,72 @@
 .meme-browser-root {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 30px 0;
+    /* justify-content: center; */
+    /* align-items: center; */
+
+    /* padding-bottom: 30px; */
+    height: 100vh;
+    width: 100vw;
 }
 
-.meme-browser-root input {
-    width: 80%;
+.meme-browser-root .input-header {
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 30px 0;
+
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+
+    background: #314755;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #26a0da, #5791b4);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #26a0da, #5791b4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+}
+
+.meme-browser-root .input-header h1 {
+    /* padding-top: 30px; */
     margin-bottom: 10px;
 }
 
-.meme-browser-root .results {
+.meme-browser-root .input-header .form-field {
     width: 90%;
-    padding: 20px 0;
+    margin-bottom: 10px;
 }
 
-.meme-browser-root .results img {
-    max-height: 80vh;
-    width: auto;
-    height: auto;
+
+.meme-browser-root .results {
+    height: 100vh;
+    width: 100vw;
+    max-width: 100%;
+    max-height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 30px 0;
+}
+
+.meme-browser-root .results .results-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    max-height: 100%;
+    height: 100%;
+    width: 90%;
+}
+
+.meme-browser-root .results .results-container div {
+    height: 100%;
+    width: 100%;
+}
+
+.meme-browser-root .results .results-container .loading {
+    height: 10rem;
+    width: 10rem;
 }
 
 @media only screen and (min-width: 768px) {
