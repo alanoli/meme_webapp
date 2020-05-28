@@ -1,0 +1,50 @@
+.footer-root {
+    background-color: rgba(0, 0, 0, 0.959);
+    width: 100vw;
+    height: 50vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    
+}
+
+.footer-root .footer-links {
+    display: flex;
+    flex-direction: row;
+}
+
+.footer-root .footer-links .links-site {
+    padding-left: 1rem;
+    width: 50%;
+}
+
+.footer-root .footer-links .links-contact {
+    padding-left: 1rem;
+    width: 50%;
+}
+
+.footer-root .footer-links .link-word {
+    color: gray;
+    font-size: 1rem;
+    font-family: 'Roboto Slab', serif;
+}
+
+.footer-root .footer-links .link-word:hover {
+    color: white;
+    cursor: pointer;
+    transition-duration: 0.6s;
+}
+
+.footer-root .bottom {
+    color: gray;
+    font-family: 'Roboto Slab', serif;
+    font-size: 0.8rem;
+
+    text-align: center;
+}
+
+.footer-root .bottom p {
+    margin: 0;
+}

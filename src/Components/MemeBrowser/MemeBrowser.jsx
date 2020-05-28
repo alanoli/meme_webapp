@@ -13,6 +13,7 @@ export default React.forwardRef((props, ref) => {
 
     const [memeArray, setMemeArray] = useState([])
     const [fetchingData, setFetchingData] = useState(false)
+    const [resultsActive, setResultsActive] = useState("")
 
     const tagsRef = useRef({})
     const stylesRef = useRef({})
@@ -30,17 +31,22 @@ export default React.forwardRef((props, ref) => {
     }
 
     async function getData() {
-        const apiResp = await api.post("/memes", {
-            tags: tagsRef.current,
-            styles: stylesRef.current
-        })
+        setResultsActive("results-active")
+        try {
+            const apiResp = await api.post("/memes", {
+                tags: tagsRef.current,
+                styles: stylesRef.current
+            })
 
-        await sleep()
-
-        if (apiResp.status === 200) {
-            setMemeArray(apiResp.data.map((item) => {
-                return { url: item.url, key: item.id }
-            }))
+            await sleep()
+            
+            if (apiResp.status === 200) {
+                setMemeArray(apiResp.data.map((item) => {
+                    return { url: item.url, key: item.id }
+                }))
+            }
+        } catch (err) {
+            // NO MEME FOUND
         }
     }
 
@@ -49,34 +55,37 @@ export default React.forwardRef((props, ref) => {
     console.log(fetchingData)
 
     return (
-        <div ref={ref} className="meme-browser-root">
-            <div className="input-header">
-                <h1>Encontre ...</h1>
-                <TagSelector
-                    placeHolder="Tags"
-                    tagColor="blue"
-                    ref={tagsRef}
-                    options={[{ value: "faustao" }, { value: "escola" }, { value: "sufoco" }]}
-                />
-                <TagSelector
-                    placeHolder="Estilo"
-                    tagColor="red"
-                    ref={stylesRef}
-                    options={[{ value: "feliz-triste" }, { value: "conversa-wpp" }]}
-                    inputProps={{readOnly:true}}
-                />
-                <Button
-                    onClick={async () => { navToRef(); setFetchingData(true); await getData(); setFetchingData(false) }}
-                    icon={<SearchOutlined />}
-                >
-                    Pesquisar
-                </Button>
+        <>
+            <div ref={ref} className={"meme-browser-root " + resultsActive}>
+                <div className="input-header">
+                    <h1>Encontre ...</h1>
+                    <TagSelector
+                        placeHolder="Tags"
+                        tagColor="blue"
+                        ref={tagsRef}
+                        options={[{ value: "faustao" }, { value: "escola" }, { value: "sufoco" }]}
+                    />
+                    <TagSelector
+                        placeHolder="Estilo"
+                        tagColor="red"
+                        ref={stylesRef}
+                        options={[{ value: "feliz-triste" }, { value: "conversa-wpp" }]}
+                        inputProps={{ readOnly: true }}
+                    />
+                    <Button
+                        onClick={async () => { navToRef(); setFetchingData(true); await getData(); setFetchingData(false) }}
+                        icon={<SearchOutlined />}
+                    >
+                        Pesquisar
+                    </Button>
+                </div>
             </div>
             <Result
+                resultModifier={resultsActive}
                 ref={resultRef}
                 memeArray={memeArray}
                 fetchingData={fetchingData}
             />
-        </div>
+        </>
     )
 })

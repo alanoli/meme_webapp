@@ -12,6 +12,17 @@
     font-family: 'Roboto Slab', serif;
 }
 
+.front-page .title-container {
+    margin-bottom: 1rem;
+}
+
+.front-page .title {
+    margin: 0;
+    
+    color: rgba(0, 0, 0, 0.835);
+    font-size: 2.3rem;
+}
+
 .front-page .btn-go {
     width: 50%;
     background-color: rgb(38, 98, 167);
@@ -22,19 +33,15 @@
 .front-page .btn-go:hover {
     background-color: white;
     color: rgb(38, 98, 167);
-    /* border: 2px solid;
-    border-color: rgb(38, 98, 167);; */
-}
-
-.front-page h1 {
-    color: rgba(0, 0, 0, 0.835);
-    font-size: 2.3rem;
-}
-
-.after-front {
-    margin-top: calc(100vh);
 }
 
 @media only screen and (min-width: 768px) {
+    .front-page .btn-go {
+        width: 20%;
+        height: 3em;
+    }
 
+    .front-page .title-container .title {
+        font-size: 7rem;
+    }
 }

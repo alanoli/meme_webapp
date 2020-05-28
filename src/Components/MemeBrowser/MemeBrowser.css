@@ -1,10 +1,14 @@
 .meme-browser-root {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: calc(100vh - 72px);
     width: 100vw;
 
     font-family: 'Roboto Slab', serif;
+}
+
+.meme-browser-root.results-active {
+    height: auto;
 }
 
 .meme-browser-root .input-header {
