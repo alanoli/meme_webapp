@@ -20,7 +20,7 @@ export default function Footer() {
 				</div>
 			</div>
 			<div className="bottom">
-				<p>@ Copyright 2020 - Todos os diretos reservados</p>
+				<p>@ Copyright - Todos os diretos reservados</p>
 				<p>seumeme.com - 2020</p>
 			</div>
 		</div>

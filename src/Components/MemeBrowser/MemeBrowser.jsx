@@ -33,7 +33,7 @@ export default React.forwardRef((props, ref) => {
     async function getData() {
         setResultsActive("results-active")
         try {
-            const apiResp = await api.post("/memes", {
+            const apiResp = await api.get("/memes", {
                 tags: tagsRef.current,
                 styles: stylesRef.current
             })
