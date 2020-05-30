@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react"
-import { Input, Button, Carousel, Tag, Select } from "antd"
+import React, { useState, useRef, useEffect } from "react"
+import { Button } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
 
 import api from "../../Connection/api"
@@ -14,9 +14,28 @@ export default React.forwardRef((props, ref) => {
     const [memeArray, setMemeArray] = useState([])
     const [fetchingData, setFetchingData] = useState(false)
     const [resultsActive, setResultsActive] = useState("")
+    const [styleOptions, setStyleOptions] = useState([])
+    const [categoryOptions, setCategoryOptions] = useState([])
 
     const tagsRef = useRef({})
     const stylesRef = useRef({})
+
+    useEffect(() => {
+        // get data for filters
+        async function getFilters() {
+            try {
+                const dbResponseStyles = await api.get("/memes/styles")
+                const dbResponseCategories = await api.get("/memes/categories")
+                if(dbResponseStyles.status === 200 && dbResponseCategories.status === 200) {
+                    setStyleOptions(dbResponseStyles)
+                    setCategoryOptions(dbResponseCategories)
+                }
+            } catch (err) {
+                window.alert(err)
+            }
+        }
+        getFilters()
+    }, [])
 
     const resultRef = React.createRef()
     function navToRef() {
@@ -60,16 +79,16 @@ export default React.forwardRef((props, ref) => {
                 <div className="input-header">
                     <h1>Encontre ...</h1>
                     <TagSelector
-                        placeHolder="Tags"
+                        placeHolder="Estilos"
                         tagColor="blue"
                         ref={tagsRef}
-                        options={[{ value: "faustao" }, { value: "escola" }, { value: "sufoco" }]}
+                        options={styleOptions}
                     />
                     <TagSelector
-                        placeHolder="Estilo"
+                        placeHolder="Categorias"
                         tagColor="red"
                         ref={stylesRef}
-                        options={[{ value: "feliz-triste" }, { value: "conversa-wpp" }]}
+                        options={categoryOptions}
                         inputProps={{ readOnly: true }}
                     />
                     <Button
