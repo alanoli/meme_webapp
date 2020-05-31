@@ -29,7 +29,7 @@ export default React.forwardRef((props, ref) => {
             mode="multiple"
             tagRender={tagRender}
             options={props.options}
-            onChange={(value) => setTags(value)}
+            onChange={(value, label) => setTags(label)}
         />
     )
 })

@@ -33,6 +33,13 @@
     justify-content: center;
 }
 
+.results .results-container img {
+    display: block;
+    width: auto;
+    /* max-width: 50%; */
+    max-height: 80%;
+}
+
 .results .results-container .loading {
     height: 10rem;
     width: 10rem;
@@ -63,4 +70,13 @@
 .results .results-container .arrow-button {
     width: 30px;
     height: 30px;
+}
+
+@media only screen and (min-width: 768px) {
+    .results .results-container img {
+        display: block;
+        width: auto;
+        max-width: 50%;
+        max-height: 80%;
+    }
 }

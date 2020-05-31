@@ -13,6 +13,7 @@ export default function Footer() {
 					<h2 className="link-word" onClick={() => history.push("/buscador")}>Buscador</h2>
 					<h2 className="link-word" onClick={() => history.push("/gerador")}>Gerador</h2>
 					<h2 className="link-word" onClick={() => history.push("/conversas-fake")}>Conversas fake</h2>
+					<h2 className="link-word" onClick={() => history.push("/api")}>API</h2>
 				</div>
 				<div className="links-contact">
 					<h2 className="link-word" onClick={() => history.push("/contact")}>Contato</h2>
