@@ -1,22 +1,28 @@
 import React from "react"
-import { useDrag } from "react-dnd"
-// import Dropzone from "react-dropzone"
+import DraggableImage from "./DraggableImage"
+import "./ImageSelector.css"
 
-const imageSelectorTest = require("../../Assets/Images/meme_selector.png")
 
-export default function ImageSelector() {
+export default function ImageSelector(props) {
+
+    const willyWonka = require("../../Assets/Memes/MemeTemplates/wiity-willy-wonka.jpg")
+    const distractedBoyfriend = require("../../Assets/Memes/MemeTemplates/distracted-boyfriend.jpg")
+    const useYourHead = require("../../Assets/Memes/MemeTemplates/use-your-head.jpg")
     
-    const [{ isDragging }, drag] = useDrag({
-        item: { type: "memeimage" },
-        collect: (monitor) => ({
-            isDragging: !!monitor.isDragging()
-        })
-    })
+    const imageArray = [
+        willyWonka,
+        distractedBoyfriend,
+        useYourHead
+    ]
 
     return (
-        <div ref={drag} className="selector-root">
-            <img src={imageSelectorTest} alt="" />
-            {/* <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
+        <>
+            <div className="selector-root">
+                {imageArray.map((item) => {
+                    return <DraggableImage imgSrc={item} />
+                    // return <img ref={props.drag} src={item} />
+                })}
+                {/* <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
                 {({ getRootProps, getInputProps }) => (
                     <section>
                         <div {...getRootProps()}>
@@ -26,6 +32,7 @@ export default function ImageSelector() {
                     </section>
                 )}
             </Dropzone> */}
-        </div>
+            </div>
+        </>
     )
 }

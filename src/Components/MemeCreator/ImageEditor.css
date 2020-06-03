@@ -1,0 +1,21 @@
+.editor-root {
+	height: 300px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.editor-root canvas {
+	height: 90%;
+}
+
+
+
+.editor-root .editor-section {
+	height: 350px;
+	width: 350px;
+
+	border: 1px dashed grey;
+}

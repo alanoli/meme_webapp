@@ -1,12 +1,12 @@
 import React from "react"
 
 
-export default function Controls() {
+export default React.forwardRef((props, ref) => {
+
     return (
         <div className="controls-root">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
+            <button onClick={() => ref.current.addText("blabla")}>Adicionar texto</button>
+            <button>Cor</button>
         </div>
     )
-}
+})

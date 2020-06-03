@@ -1,31 +1,18 @@
 import React from "react"
-import { DndProvider } from "react-dnd"
-import { HTML5Backend } from "react-dnd-html5-backend"
+// import { DndProvider } from "react-dnd"
+// import { HTML5Backend } from "react-dnd-html5-backend"
+import CreatorRoot from "./CreatorRoot"
 
-import ImageSelector from "./ImageSelector"
-import Controls from "./Controls"
-
-const { Button } = require("antd")
-const imgTest = require("../../Assets/Images/beingBuiltImage.jpg")
-
-export const ItemTypes = {
-	MEMEIMAGE: 'memeimage'
-  }
+import "./MemeCreator.css"
 
 export default function MemeCreator() {
+
 	return (
-		<DndProvider backend={HTML5Backend}>
+		// TODO: remove refactor component
+		// <DndProvider backend={HTML5Backend}>
 			<div className="creator-root">
-				<ImageSelector />
-				<div className="image-editor">
-					<img src={imgTest} alt="" />
-				</div>
-				<Controls />
-				<div className="image-save-panel">
-					<Button>Exportar</Button>
-					<Button>Cancelar</Button>
-				</div>
+				<CreatorRoot />
 			</div>
-		</DndProvider>
+		// </DndProvider>
 	)
 }
