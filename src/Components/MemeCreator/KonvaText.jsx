@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react"
 import { Text, Transformer } from "react-konva"
 
-export default function KonvaText({ text, onSelect, isSelected, stageRef }) {
+export default function KonvaText({ text, onSelect, isSelected }) {
 
 	const [position, setPosition] = useState({ x: 0, y: 0 })
 	const [currentText, setCurrentText] = useState(text)
-	// const [beingEdited, setBeingEdited] = useState(false)
+	const [beingUsed, setBeingUsed] = useState(false)
 
 	const transformRef = React.useRef()
 	const textRef = React.useRef()
-
-	console.log("isSelected: ", isSelected, "current: ", stageRef.current.selectedTextId)
 
 	useEffect(() => {
 		if (isSelected) {
@@ -31,8 +29,8 @@ export default function KonvaText({ text, onSelect, isSelected, stageRef }) {
 					setPosition({ x: e.target.x(), y: e.target.y() })
 				}}
 				fontSize={30}
-				fill="white"
-				onDblClick={onSelect}
+				// fill="white"
+				onDblClick={() => { onSelect(); setBeingUsed(true) }}
 			/>
 			{isSelected && (
 				<Transformer

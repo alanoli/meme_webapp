@@ -1,4 +1,4 @@
-import React, { useState, useImperativeHandle, useRef } from "react"
+import React, { useState, useImperativeHandle, useRef, useEffect } from "react"
 import { Stage, Layer, Image } from "react-konva"
 
 import "./ImageEditor.css"
@@ -7,26 +7,15 @@ import KonvaText from "./KonvaText"
 
 export default React.forwardRef((props, ref) => {
 
-	// const [currentImage, setCurrentImage] = useState()
-	// const [textItems, setTextItems] = useState([])
-	const [elementArray, setElementArray] = useState([])
+	const [textArray, setTextArray] = useState([])
 	const [selectedTextId, setSelectedTextId] = useState(null)
+	const [imageArray, setImageArray] = useState([])
 
 	const stageRefs = useRef()
 
 	useImperativeHandle(ref, () => ({
 		addText(textContent) {
-			const id = "1" // TODO: randomize
-			setElementArray(array => [...array,
-			<KonvaText
-				text={textContent}
-				key={id}
-				stageRef={stageRefs}
-				// currentSelected={stageRefs.current.selectedTextId}
-				isSelected={id === selectedTextId}
-				onSelect={() => { setSelectedTextId(id) }}
-			/>
-			])
+			setTextArray(array => [...array, { text: textContent }])
 		},
 
 		downloadImage(name = "seumeme.png") {
@@ -40,36 +29,36 @@ export default React.forwardRef((props, ref) => {
 		}
 	}))
 
-	// function draw(imgSrc) {
-	// 	const img = document.createElement("img");
-	// 	img.src = imgSrc
-	// 	img.onload = function () {
-	// 		setCurrentImage(img)
-	// 	}
-	// }
-
 	function drop(event) {
 		event.preventDefault()
 		const img = document.createElement("img")
 		img.src = event.dataTransfer.getData("src")
-		// img.crossOrigin = "Anonymous"
 		img.onload = function () {
-			setElementArray(array => [...array, <Image image={img} key={0} x={0} y={0} width={350} height={350} />])
+			setImageArray(array => [...array, img])
 		}
 	}
 
 	function checkDeselect(e) {
-		const clickedOnEmpty = e.target === e.target.getStage()
-		if (clickedOnEmpty) {
+		console.log(e.target)
+		console.log(e.target.tagName)
+		// console.log(e.target.getStage())
+		// console.log(e.target.getLayer())
+		// const otherObject = e.target.getStage().children
+		// if(e.target.class === "editor-root") {
+		// 	setSelectedTextId(null)
+		if (e.target.tagName !== "CANVAS") {
 			setSelectedTextId(null)
 		}
+		// if (e.target === e.target.getStage()) {
+		// 	setSelectedTextId(null)
+		// }
 	}
 
-	console.log(selectedTextId)
-
 	return (
-		<div className="editor-root">
-			{/* <button onClick={() => { downloadURI(stageRefs.current.toDataURL(), "image.png") }} >RemoveImage</button> */}
+		<div
+			className="editor-root"
+			onMouseDown={checkDeselect}
+		>
 			<div
 				className="editor-section"
 				onDragOver={(event) => event.preventDefault()}
@@ -79,22 +68,35 @@ export default React.forwardRef((props, ref) => {
 					ref={stageRefs}
 					width={350}
 					height={350}
-					onMouseDown={checkDeselect}
 				>
 					<Layer>
-						{elementArray.map((item) => {
-							return item
+						{imageArray.map((item, i) => {
+							return (
+								<Image
+									image={item}
+									key={i}
+									x={0}
+									y={0}
+									width={350}
+									height={350}
+								/>
+							)
 						})}
-						{/* <KonvaText
-							text={"textContent"}
-							key={1}
-							currentSelected={selectedTextId}
-							isSelected={1 === selectedTextId}
-							onSelect={() => { setSelectedTextId(1) }}
-						/> */}
+					</Layer>
+					<Layer>
+						{textArray.map((item, i) => {
+							return (
+								<KonvaText
+									text={item.text}
+									key={i}
+									isSelected={i === selectedTextId}
+									onSelect={() => { setSelectedTextId(i) }}
+								/>
+							)
+						})}
 					</Layer>
 				</Stage>
 			</div>
-		</div >
+		</div>
 	)
 })
