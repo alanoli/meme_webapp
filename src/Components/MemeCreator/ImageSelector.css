@@ -6,4 +6,11 @@
 
     max-height: 200px;
     height: 200px;
+
+    overflow: scroll;
+}
+
+.selector-root img {
+    height: 80%;
+    width: 50%;
 }

@@ -6,6 +6,7 @@ import KonvaText from "./KonvaText"
 
 
 export default React.forwardRef((props, ref) => {
+	const DEFAULT_TEXT_COLOR = "black"
 
 	const [textArray, setTextArray] = useState([])
 	const [selectedTextId, setSelectedTextId] = useState(null)
@@ -14,8 +15,15 @@ export default React.forwardRef((props, ref) => {
 	const stageRefs = useRef()
 
 	useImperativeHandle(ref, () => ({
-		addText(textContent) {
-			setTextArray(array => [...array, { text: textContent }])
+		addText() {
+			const textContent = prompt("Insira o texto:")
+			setTextArray(textArray => [...textArray, { text: textContent, color: DEFAULT_TEXT_COLOR }].map((textItem, i) => {
+				return ({
+					text: textItem.text,
+					color: textItem.color,
+					textId: i
+				})
+			}))
 		},
 
 		downloadImage(name = "seumeme.png") {
@@ -26,7 +34,22 @@ export default React.forwardRef((props, ref) => {
 			document.body.appendChild(link);
 			link.click();
 			document.body.removeChild(link);
+		},
+
+		changeColor(color) {
+			setTextArray(textArray => textArray.map((textItem) => {
+				if(textItem.textId === selectedTextId) {
+					textItem.color = color
+				}
+				return textItem
+			}))
+		},
+
+		deleteText() {
+			setTextArray(textArray => textArray.filter((item) => item.textId !== selectedTextId))
+			setSelectedTextId(null)
 		}
+
 	}))
 
 	function drop(event) {
@@ -39,19 +62,9 @@ export default React.forwardRef((props, ref) => {
 	}
 
 	function checkDeselect(e) {
-		console.log(e.target)
-		console.log(e.target.tagName)
-		// console.log(e.target.getStage())
-		// console.log(e.target.getLayer())
-		// const otherObject = e.target.getStage().children
-		// if(e.target.class === "editor-root") {
-		// 	setSelectedTextId(null)
 		if (e.target.tagName !== "CANVAS") {
 			setSelectedTextId(null)
 		}
-		// if (e.target === e.target.getStage()) {
-		// 	setSelectedTextId(null)
-		// }
 	}
 
 	return (
@@ -84,13 +97,15 @@ export default React.forwardRef((props, ref) => {
 						})}
 					</Layer>
 					<Layer>
-						{textArray.map((item, i) => {
+						{textArray.map((item) => {
 							return (
 								<KonvaText
 									text={item.text}
-									key={i}
-									isSelected={i === selectedTextId}
-									onSelect={() => { setSelectedTextId(i) }}
+									key={item.textId}
+									fontStyle={"bold"}
+									color={item.color}
+									isSelected={item.textId === selectedTextId}
+									onSelect={() => { setSelectedTextId(item.textId) }}
 								/>
 							)
 						})}

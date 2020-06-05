@@ -1,6 +1,8 @@
 .creator-root {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 
     width: 100vw;
     max-width: 100vw;
@@ -8,7 +10,11 @@
     max-height: 600px;
 }
 
+.creator-root .image-save-panel {
+    margin: 20px 0;
+}
+
 .creator-root img {
-    /* height: 150px;
-    width: 150px; */
+    /* height: 90%;
+    width: auto; */
 }

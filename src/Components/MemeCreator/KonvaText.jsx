@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { Text, Transformer } from "react-konva"
 
-export default function KonvaText({ text, onSelect, isSelected }) {
+export default function KonvaText({ text, onSelect, color, isSelected }) {
 
 	const [position, setPosition] = useState({ x: 0, y: 0 })
-	const [currentText, setCurrentText] = useState(text)
-	const [beingUsed, setBeingUsed] = useState(false)
 
 	const transformRef = React.useRef()
 	const textRef = React.useRef()
@@ -21,7 +19,7 @@ export default function KonvaText({ text, onSelect, isSelected }) {
 		<>
 			<Text
 				ref={textRef}
-				text={currentText}
+				text={text}
 				draggable
 				x={position.x}
 				y={position.y}
@@ -29,8 +27,8 @@ export default function KonvaText({ text, onSelect, isSelected }) {
 					setPosition({ x: e.target.x(), y: e.target.y() })
 				}}
 				fontSize={30}
-				// fill="white"
-				onDblClick={() => { onSelect(); setBeingUsed(true) }}
+				fill={color}
+				onClick={onSelect}
 			/>
 			{isSelected && (
 				<Transformer
