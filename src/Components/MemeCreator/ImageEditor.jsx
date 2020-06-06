@@ -38,7 +38,7 @@ export default React.forwardRef((props, ref) => {
 
 		changeColor(color) {
 			setTextArray(textArray => textArray.map((textItem) => {
-				if(textItem.textId === selectedTextId) {
+				if (textItem.textId === selectedTextId) {
 					textItem.color = color
 				}
 				return textItem
@@ -48,8 +48,15 @@ export default React.forwardRef((props, ref) => {
 		deleteText() {
 			setTextArray(textArray => textArray.filter((item) => item.textId !== selectedTextId))
 			setSelectedTextId(null)
-		}
+		},
 
+		addImage(imageSrc) {
+			const img = document.createElement("img")
+			img.src = imageSrc
+			img.onload = function () {
+				setImageArray(array => [...array, img])
+			}
+		}
 	}))
 
 	function drop(event) {

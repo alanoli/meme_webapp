@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import ImageSelector from "./ImageSelector"
 import Controls from "./Controls"
 
@@ -11,10 +11,10 @@ const { Button } = require("antd")
 export default function CreatorRoot() {
 
     const controlRef = useRef()
-
+    
     return (
         <div className="creator-root">
-            <ImageSelector />
+            <ImageSelector ref={controlRef}/>
             <ImageEditor ref={controlRef} />
             <Controls ref={controlRef} />
             <div className="image-save-panel">

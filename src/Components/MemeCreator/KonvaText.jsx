@@ -29,6 +29,7 @@ export default function KonvaText({ text, onSelect, color, isSelected }) {
 				fontSize={30}
 				fill={color}
 				onClick={onSelect}
+				onTap={onSelect}
 			/>
 			{isSelected && (
 				<Transformer
