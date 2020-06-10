@@ -21,7 +21,7 @@ export default function App() {
         <BrowserRouter forceRefresh={true}>
             <Switch>
                 <Route exact path="/">
-                    <MainHeader />
+                    {/* <MainHeader /> */}
                     <FrontPage ref={catalogRef} />
                     <Catalog ref={catalogRef} />
                 </Route>
