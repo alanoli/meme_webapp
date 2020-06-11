@@ -23,7 +23,7 @@ export default function App() {
                 <Route exact path="/">
                     {/* <MainHeader /> */}
                     <FrontPage ref={catalogRef} />
-                    <Catalog ref={catalogRef} />
+                    {/* <Catalog ref={catalogRef} /> */}
                 </Route>
                 <Route exact path="/buscador">
                     <Header />

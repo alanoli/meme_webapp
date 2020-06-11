@@ -1,0 +1,36 @@
+.image-slider-root {
+    display: flex;
+    flex-direction: row;
+}
+
+.image-slider-root img {
+    position: relative;
+    height: 100px;
+    animation: moveImage 10s infinite;
+    animation-timing-function: linear;
+}
+
+.image-slider-root img.reverse {
+    position: relative;
+    height: 100px;
+    animation: moveImageReverse 10s infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes moveImage {
+    from {
+        left: -50px;
+    }
+    to {
+        left: 50px;
+    }
+}
+
+@keyframes moveImageReverse {
+    from {
+        left: 50px;
+    }
+    to {
+        left: -50px;
+    }
+}
