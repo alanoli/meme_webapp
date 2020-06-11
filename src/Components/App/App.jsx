@@ -1,11 +1,11 @@
 import React from "react"
 import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom"
 
-import MainHeader from "../MainHeader/Header"
+// import MainHeader from "../MainHeader/Header"
 import Header from "../Header/Header"
 import FrontPage from "../FrontPage/FrontPage"
 import MemeBrowser from "../MemeBrowser/MemeBrowser"
-import Catalog from "../Catalog/Catalog"
+// import Catalog from "../Catalog/Catalog"
 import BeingBuilt from "../App/BeingBuilt"
 import Footer from "../Footer/Footer"
 import MemeCreator from "../MemeCreator/MemeCreator"
@@ -21,9 +21,7 @@ export default function App() {
         <BrowserRouter forceRefresh={true}>
             <Switch>
                 <Route exact path="/">
-                    {/* <MainHeader /> */}
                     <FrontPage ref={catalogRef} />
-                    {/* <Catalog ref={catalogRef} /> */}
                 </Route>
                 <Route exact path="/buscador">
                     <Header />

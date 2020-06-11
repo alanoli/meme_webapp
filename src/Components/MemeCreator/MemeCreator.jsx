@@ -1,18 +1,21 @@
-import React from "react"
-// import { DndProvider } from "react-dnd"
-// import { HTML5Backend } from "react-dnd-html5-backend"
-import CreatorRoot from "./CreatorRoot"
+import React, { useRef } from "react"
+
+import ImageSelector from "./ImageSelector"
+import Controls from "./Controls"
+import ImageEditor from "./ImageEditor"
 
 import "./MemeCreator.css"
 
+
 export default function MemeCreator() {
 
+	const controlRef = useRef()
+
 	return (
-		// TODO: remove refactor component
-		// <DndProvider backend={HTML5Backend}>
-			<div className="creator-root">
-				<CreatorRoot />
-			</div>
-		// </DndProvider>
+		<div className="creator-root">
+			<ImageSelector ref={controlRef} />
+			<ImageEditor ref={controlRef} />
+			<Controls ref={controlRef} />
+		</div>
 	)
 }

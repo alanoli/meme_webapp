@@ -2,3 +2,7 @@
     font-family: 'Roboto Slab', serif;
     /* background-color: blue; */
 }
+
+.custom-page-header .ant-page-header {
+    padding: 10px 24px;
+}

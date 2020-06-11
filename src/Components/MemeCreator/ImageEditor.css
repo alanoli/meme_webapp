@@ -14,7 +14,7 @@
 .editor-root .editor-section {
 	height: 350px;
 	width: 350px;
-	margin: 20px 0;
+	/* margin: 20px 0; */
 
 	border: 1px dashed grey;
 }

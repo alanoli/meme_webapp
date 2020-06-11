@@ -21,7 +21,6 @@
 
     box-shadow: 1px 1px 30px rgb(90, 90, 90), 1px 1px 30px rgb(90, 90, 90);
 
-    padding: 0 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -29,6 +28,22 @@
     text-align: center;
 
     z-index: 10;
+}
+
+.front-page .title-bar {
+    width: 100%;
+    height: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    background-color: #f96d00;
+    padding: 0 5px;
+}
+
+.front-page .title-bar img {
+    margin-left: auto;
+    height: 80%;
 }
 
 .front-page .front-middle .title-container {
@@ -51,6 +66,7 @@
 }
 
 .front-page .front-middle .site-options-root {
+    padding: 0 1rem;
     flex: 3;
     display: flex;
     flex-direction: column;

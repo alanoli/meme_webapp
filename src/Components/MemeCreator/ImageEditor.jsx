@@ -26,6 +26,13 @@ export default React.forwardRef((props, ref) => {
 			}))
 		},
 
+		changeTextColor(color) {
+			setTextArray(textArray => textArray.map((textItem) => {
+				if(textItem.textId === selectedTextId) { textItem.color = color }
+				return textItem
+			}))
+		},
+
 		downloadImage(name = "seumeme.png") {
 			const uri = stageRefs.current.toDataURL()
 			let link = document.createElement('a');
@@ -34,15 +41,6 @@ export default React.forwardRef((props, ref) => {
 			document.body.appendChild(link);
 			link.click();
 			document.body.removeChild(link);
-		},
-
-		changeColor(color) {
-			setTextArray(textArray => textArray.map((textItem) => {
-				if (textItem.textId === selectedTextId) {
-					textItem.color = color
-				}
-				return textItem
-			}))
 		},
 
 		deleteText() {
@@ -56,7 +54,13 @@ export default React.forwardRef((props, ref) => {
 			img.onload = function () {
 				setImageArray(array => [...array, img])
 			}
+		},
+
+		cleanUpScreen() {
+			setTextArray([])
+			setImageArray([])
 		}
+
 	}))
 
 	function drop(event) {
@@ -105,6 +109,7 @@ export default React.forwardRef((props, ref) => {
 					</Layer>
 					<Layer>
 						{textArray.map((item) => {
+							console.log(item.color)
 							return (
 								<KonvaText
 									text={item.text}
