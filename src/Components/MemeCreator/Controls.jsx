@@ -14,17 +14,21 @@ export default React.forwardRef((props, ref) => {
 
     return (
         <div className="controls-root">
-            <SliderPicker
-                color={selectedColor}
-                onChange={(color) => {
-                    setSelectedColor(color)
-                    ref.current.changeTextColor(color.hex)
-                }}
-            />
-            <button onClick={() => ref.current.addText(DEFAULT_TEXT_CONTENT)}>Adicionar texto</button>
-            <button onClick={() => ref.current.deleteText()}>Deletar</button>
-            <button onClick={() => ref.current.downloadImage()} >Exportar</button>
-            <button onClick={() => setModalVisible(true)} >Limpar</button>
+            <div className="color-root">
+                <SliderPicker
+                    color={selectedColor}
+                    onChange={(color) => {
+                        setSelectedColor(color)
+                        ref.current.changeTextColor(color.hex)
+                    }}
+                />
+            </div>
+            <div className="control-buttons">
+                <button onClick={() => ref.current.addText(DEFAULT_TEXT_CONTENT)}>Adicionar texto</button>
+                <button onClick={() => ref.current.deleteText()}>Deletar</button>
+                <button onClick={() => ref.current.downloadImage()} >Exportar</button>
+                <button onClick={() => setModalVisible(true)} >Limpar</button>
+            </div>
             <Modal
                 visible={modalVisible}
                 onOk={() => {

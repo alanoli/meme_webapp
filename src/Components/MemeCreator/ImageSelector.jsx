@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import DraggableImage from "./DraggableImage"
+import Dropzone from "react-dropzone"
 import { Modal, Form } from "antd"
 import "./ImageSelector.css"
 
@@ -23,10 +23,20 @@ export default React.forwardRef((props, ref) => {
         <>
             <div className="selector-root">
                 <div className="drop-zone">
-                    Clique aqui para selecionar do arquivo
+                    <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
+                        {({ getRootProps, getInputProps }) => (
+                            <section>
+                                <div {...getRootProps()}>
+                                    <input {...getInputProps()} />
+                                    <p>Carrege uma imagem</p>
+                                </div>
+                            </section>
+                        )}
+                    </Dropzone>
                 </div>
-                <div onClick={() => setImageGaleryModalVisible(true)} className="image-selection-box">
-                    <img src={galeryImage} />
+                <div onClick={() => setImageGaleryModalVisible(true)} className="image-selection-box main-button-style">
+                    {/* <img src={galeryImage} /> */}
+                    <p>Selecione</p>
                 </div>
                 <Modal
                     title="Selecione a imagem base"
@@ -43,16 +53,6 @@ export default React.forwardRef((props, ref) => {
                         }
                     />
                 </Modal>
-                {/* <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
-                    {({ getRootProps, getInputProps }) => (
-                        <section>
-                            <div {...getRootProps()}>
-                                <input {...getInputProps()} />
-                                <p>Drag 'n' drop some files here, or click to select files</p>
-                            </div>
-                        </section>
-                    )}
-                </Dropzone> */}
             </div>
         </>
     )

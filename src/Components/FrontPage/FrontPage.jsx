@@ -9,9 +9,6 @@ import menuImg from "../../Assets/Images/menu-aberto.png"
 
 export default React.forwardRef((props, catalogRef) => {
 
-    // function navToRef() {
-    //     catalogRef.current.scrollIntoView({ behavior: "smooth", block: "start" })
-    // }
     const history = useHistory()
 
     return (
@@ -22,21 +19,18 @@ export default React.forwardRef((props, catalogRef) => {
                     <img src={menuImg} alt=""/>
                 </div>
                 <div className="title-container">
-                    <h1 className="title">Seu Meme</h1>
+                    <h1 className="title">SeU MeMe</h1>
                 </div>
                 <div className="site-options-root">
-                    <div onClick={() => history.push("/gerador")} className="option">
+                    <div onClick={() => history.push("/gerador")} className="option main-button-style">
                         <p className="text">Crie</p>
                         <img src={lapis} alt=""/>
                     </div>
-                    <div onClick={() => history.push("/buscador")} className="option">
+                    <div onClick={() => history.push("/buscador")} className="option main-button-style">
                         <p className="text">Encontre</p>
                         <img src={lupa} alt=""/>
                     </div>
                 </div>
-                {/* <div className="nav-button-root">
-                    <Button className="btn-go">Explorar</Button>
-                </div> */}
             </div>
             <ImageInfiniteSlider orientation={"reverse"}/>
         </div>
