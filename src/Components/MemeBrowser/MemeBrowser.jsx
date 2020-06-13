@@ -1,19 +1,19 @@
 import React, { useState, useRef, useEffect } from "react"
-import { Button } from "antd"
+import { Button, Input } from "antd"
 import { SearchOutlined } from "@ant-design/icons"
+import debounce from "lodash.debounce"
 
 import api from "../../Connection/api"
 import "./MemeBrowser.css"
 
 import TagSelector from "./TagSelector"
 import Result from "./Result"
+import searchIcon from "../../Assets/Images/search_icon.png"
 
 
 export default React.forwardRef((props, ref) => {
 
-	const [memeArray, setMemeArray] = useState([])
-	const [arraySize, setArraySize] = useState(1)
-	const [resultArray, setResultArray] = useState([])
+	const [memeArray, setMemeArray] = useState({ arraySize: 1, completeArray: [], displayArray: [] })
 
 	const [fetchingData, setFetchingData] = useState(false)
 	const [resultsActive, setResultsActive] = useState("")
@@ -42,7 +42,15 @@ export default React.forwardRef((props, ref) => {
 				window.alert(err)
 			}
 		}
+		async function getInitialData() {
+			setFetchingData(true)
+			await getData()
+			setFetchingData(false)
+		}
+
+		getInitialData()
 		getFilters()
+
 	}, [])
 
 	const resultRef = React.createRef()
@@ -58,23 +66,25 @@ export default React.forwardRef((props, ref) => {
 	}
 
 	async function getData() {
-		// console.log("getting data")
 		setResultsActive("results-active")
 		try {
-			// console.log("cat: ", categRef, "styl: ", stylesRef)
 			const apiResp = await api.post("/memes", {
 				category: categRef.current[0] === undefined ? "" : categRef.current[0].value,
 				style: stylesRef.current[0] === undefined ? "" : stylesRef.current[0].value
 			})
 
-			await sleep()
+			// await sleep()
 
 			if (apiResp.status === 200) {
-				setMemeArray(apiResp.data.map((item) => {
+				let completeArray = apiResp.data.map((item) => {
 					return { url: item.url, key: item.id }
-				}))
-				setArraySize(3)
-				setResultArray(resultArray => memeArray.slice(0, arraySize))
+				})
+				let memeArr = {
+					"arraySize": 3,
+					"completeArray": completeArray,
+					"displayArray": completeArray.slice(0, 3)
+				}
+				setMemeArray(memeArray => memeArr)
 			}
 		} catch (err) {
 			console.log(err)
@@ -82,13 +92,17 @@ export default React.forwardRef((props, ref) => {
 		}
 	}
 
-	window.onscroll = () => {
-		if(window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
-			console.log(memeArray.slice(0, arraySize))
-			setArraySize(size => size + 1)
-			setResultArray(resultArray => memeArray.slice(0, arraySize))
+	window.onscroll = debounce(() => {
+		if (document.body.scrollHeight - window.scrollY <= window.innerHeight + 420) {
+			setMemeArray((memeArray) => {
+				return ({
+					"arraySize": memeArray.arraySize + 1,
+					"completeArray": memeArray.completeArray,
+					"displayArray": memeArray.completeArray.slice(0, memeArray.arraySize + 1)
+				})
+			})
 		}
-	}
+	}, 100);
 
 	// TODO: get styles and tags when componen is mounted only
 	// console.log(fetchingData)
@@ -96,7 +110,11 @@ export default React.forwardRef((props, ref) => {
 	return (
 		<>
 			<div ref={ref} className={"meme-browser-root " + resultsActive}>
-				<div className="input-header">
+				<div className="search-bar">
+					<img src={searchIcon} alt=""/>
+					<Input placeholder="Pesquise por memes" />
+				</div>
+				{/* <div className="input-header">
 					<h1>Encontre ...</h1>
 					<TagSelector
 						placeHolder="Estilos"
@@ -117,12 +135,12 @@ export default React.forwardRef((props, ref) => {
 					>
 						Pesquisar
 					</Button>
-				</div>
+				</div> */}
 			</div>
 			<Result
 				resultModifier={resultsActive}
 				ref={resultRef}
-				memeArray={resultArray}
+				memeArray={memeArray}
 				fetchingData={fetchingData}
 			/>
 		</>

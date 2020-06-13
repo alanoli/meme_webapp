@@ -1,7 +1,7 @@
 .meme-browser-root {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 72px);
+    height: calc(100vh - 50px);
     width: 100vw;
 
     font-family: 'Roboto Slab', serif;
@@ -9,6 +9,24 @@
 
 .meme-browser-root.results-active {
     height: auto;
+}
+
+.meme-browser-root .search-bar {
+    height: 30px;
+    padding-left: 5px;
+    padding-top: 5px;
+
+    position: fixed;
+
+    display: flex;
+    flex-direction: row;
+
+    margin-bottom: 20px;
+}
+
+.meme-browser-root .search-bar img {
+    height: 80%;
+    margin-right: 5px;
 }
 
 .meme-browser-root .input-header {

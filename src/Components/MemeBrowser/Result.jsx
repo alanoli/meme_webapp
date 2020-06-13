@@ -14,8 +14,12 @@ export default React.forwardRef((props, ref) => {
                     <Loading className="loading" />
                     :
                     <>
-                        {props.memeArray.map((item) => {
-                            return <img key={item.key} src={item.url} alt="meme-imagem" />
+                        {props.memeArray.displayArray.map((item) => {
+                            return (
+                                <div className="image-container">
+                                    <img key={item.key} src={item.url} alt="meme-imagem" />
+                                </div>
+                            )
                         })}
                         {/* <div className="arrow-button-group">
                             <LeftOutlined className="left arrow-button"></LeftOutlined>
