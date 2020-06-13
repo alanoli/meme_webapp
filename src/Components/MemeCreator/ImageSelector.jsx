@@ -23,7 +23,15 @@ export default React.forwardRef((props, ref) => {
         <>
             <div className="selector-root">
                 <div className="drop-zone">
-                    <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
+                    <Dropzone onDrop={(acceptedFile) => { // TODO: Restrict to only one file input
+                        console.log(acceptedFile)
+                        const reader = new FileReader()
+                        reader.onload = (e) => {
+                            ref.current.addImageFromFile(e.target.result)
+                            console.log(e.target.result)
+                        }
+                        reader.readAsBinaryString(acceptedFile[0])
+                    }}>
                         {({ getRootProps, getInputProps }) => (
                             <section>
                                 <div {...getRootProps()}>

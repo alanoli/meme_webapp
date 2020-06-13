@@ -56,6 +56,16 @@ export default React.forwardRef((props, ref) => {
 			}
 		},
 
+		addImageFromFile(binaryData) {
+			const img = document.createElement("img")
+			// let img_base64_val = btoa(unescape(encodeURIComponent(binaryData)));
+			let base64 = base64
+			img.src = `data:image/png;base64,${binaryData}`
+			img.onload = function () {
+				setImageArray(array => [...array, img])
+			}
+		},
+
 		cleanUpScreen() {
 			setTextArray([])
 			setImageArray([])

@@ -1,8 +1,8 @@
 import React, { useRef } from "react"
 
 import ImageSelector from "./ImageSelector"
-import Controls from "./Controls"
 import ImageEditor from "./ImageEditor"
+import Controls from "./Controls"
 
 import "./MemeCreator.css"
 

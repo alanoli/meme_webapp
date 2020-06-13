@@ -1,8 +1,8 @@
 .custom-page-header {
     font-family: 'Roboto Slab', serif;
-    /* background-color: blue; */
+    background-color: #f96d00;
 }
 
 .custom-page-header .ant-page-header {
-    padding: 10px 24px;
+    padding: 5px 24px;
 }

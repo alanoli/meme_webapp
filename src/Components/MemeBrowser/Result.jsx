@@ -6,7 +6,7 @@ import "./Result.css"
 
 
 export default React.forwardRef((props, ref) => {
-
+    console.log(props.memeArray)
     return (
         <div ref={ref} className={"results " + props.resultModifier}>
             <div className="results-container">
@@ -14,18 +14,21 @@ export default React.forwardRef((props, ref) => {
                     <Loading className="loading" />
                     :
                     <>
+                        {props.memeArray.map((item) => {
+                            return <img key={item.key} src={item.url} alt="meme-imagem" />
+                        })}
                         {/* <div className="arrow-button-group">
                             <LeftOutlined className="left arrow-button"></LeftOutlined>
                             <RightOutlined className="right arrow-button"></RightOutlined>
                         </div> */}
-                        <Carousel
+                        {/* <Carousel
                             dots={true}
                             autoplay
                         >
                             {props.memeArray.map((item) => {
                                 return <img key={item.key} src={item.url} alt="meme-imagem" />
                             })}
-                        </Carousel>
+                        </Carousel> */}
                     </>
                 }
             </div>
